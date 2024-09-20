@@ -3,9 +3,13 @@ import typer
 from rich import print
 import os
 import sys
+from typing_extensions import Annotated
+from typing import Optional
+from app import __version__
+
 
 # Create Typer instance
-app = typer.Typer()
+app = typer.Typer(no_args_is_help=True)
 
 # Initialize Groq client
 client = Groq(
@@ -53,8 +57,29 @@ def generate_comments(content: str) -> str:
     return response.choices[0].message.content
 
 
+
+# Version callback   
+def version_callback(present: bool):
+    if present:
+        print(__version__)
+        raise typer.Exit()
+
 @app.command()
-def add_comments(files: list[str]):
+def add_comments( 
+    files: Annotated[
+        Optional[list[str]],
+        typer.Argument(..., help="The Source Code files"),
+    ],
+    version: Annotated[Optional[bool],
+        typer.Option(
+            "--version",
+            "-v",
+            help="Get the version number",
+            is_eager=True,
+            callback=version_callback,
+        ),
+    ] = None,
+):
     """
     Add comments to each of the provided files.
     """
