@@ -67,9 +67,9 @@ def version_callback(present: bool):
         print(__version__)
         raise typer.Exit()
 
+
 @app.command()
-def add_comments( 
-    files: Annotated[
+def add_comments(files: Annotated[
         Optional[list[str]],
         typer.Argument(..., help="The Source Code files"),
     ],
