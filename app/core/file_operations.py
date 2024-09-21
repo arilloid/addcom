@@ -1,6 +1,7 @@
 import sys
 import os
 
+
 def load_contents(filepath):
     """
     Read the contents of a file and return it. If the file is not found,

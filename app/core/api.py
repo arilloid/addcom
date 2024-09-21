@@ -1,6 +1,7 @@
 from groq import Groq
 import os
 
+
 # Initialize Groq client
 client = Groq(
     api_key=os.getenv('GROQ_API_KEY')
@@ -12,6 +13,7 @@ prompt = (
     "comments to explain it's functionality where necessary. Comments should be formatted according to best practices. "
     "Return modified code with the added comments and no additional text or explanation as plain text"
 )
+
 
 def generate_comments(content: str) -> str:
     """
