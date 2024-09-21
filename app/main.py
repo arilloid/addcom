@@ -68,8 +68,17 @@ def version_callback(present: bool):
         raise typer.Exit()
 
 
+
+# Version callback   
+def version_callback(present: bool):
+    if present:
+        print(__version__)
+        raise typer.Exit()
+
 @app.command()
-def add_comments(files: Annotated[
+
+def add_comments( 
+    files: Annotated[
         Optional[list[str]],
         typer.Argument(..., help="The Source Code files"),
     ],
