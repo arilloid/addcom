@@ -1,2 +1,2 @@
-__version__ = '0.0.2'
-__dependencies__ = ['typer', 'groq', 'typing_extensions']
+__version__ = '0.0.3'
+__dependencies__ = ['typer', 'groq', 'typing_extensions', "rich"]
