@@ -71,10 +71,16 @@ You can add comments to one or multiple source code files. Just type addcom and 
 | `--base-url`    | `-u`     | TEXT   | Specify base URL for the API                          | None    |
 | `--model `      | `-o`     | TEXT   | Specify a LLM to use for comment generation           | None    |
 
-### Notes:
+### Notes
 `--output` / `-o` - If multiple files are specified, the commented source code from all files will be combined and saved into a single output file.
 
 `--api-key` / `-a` - As mentioned above, there are 2 ways to provide the API key to the tool, passing the API key using this option will override the API key that was exposed to the terminal.
+
+Example (using OpenRouter API)
+
+```cmd
+ addcom -u https://openrouter.ai/api/v1 -a "your_api_key" -m meta-llama/llama-3.1-8b-instruct:free samples/test.py
+```
 
 `--base-url` / `u` - If you decide to use a custom API endpoint, make sure to obtain an API key and specify a Large Language Model supported by the API of your choice.
 
