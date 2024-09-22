@@ -18,7 +18,7 @@ def generate_comments(content: str, api_key: str, url: str, model: str) -> str:
     Returns the code with generated comments.
     """
     # Use environment variable for API key if it was not provided
-    api_key = api_key or os.getenv('API_KEY')
+    api_key = api_key or os.getenv('ADDCOM_API_KEY')
 
     # Check if API key was successfully set
     if not api_key:

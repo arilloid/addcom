@@ -42,7 +42,7 @@ def add_comments(
     ] = None,
     model: Annotated[Optional[str],
         typer.Option("--model", "-m", 
-            help="Specify LLM model to use for comment generation"
+            help="Specify a LLM to use for comment generation"
         )
     ] = None,
 ):
