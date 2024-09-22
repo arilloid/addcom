@@ -22,7 +22,7 @@ By default, addcom uses the Groq API endpoint for chat completion. However, you 
 
 #### 3. Set the API key
 
-To do this you can either expose the API key to the terminal:
+To do this you can expose the API key to the terminal:
 
   Command Prompt
   
@@ -30,7 +30,7 @@ To do this you can either expose the API key to the terminal:
    set GROQ_API_KEY=your_api_key_here
    ```
   
-  Poweshell
+  Powershell
   
   ```powershell
   $env:ADDCOM_API_KEY="your_api_key_here"
