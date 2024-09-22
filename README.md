@@ -5,12 +5,11 @@ Give it a relative/absolute path to your file and it will analyze its contents a
 
 ![addcom](https://github.com/user-attachments/assets/e01f1c1b-faf4-4c2d-b62b-a2492de1475b)
 
-# Prerequisites 
-
-Make sure Python is installed on your system (you can download it here: https://www.python.org/downloads/)
-
 # Setup Instructions
 
+### Prerequisites 
+
+> Make sure Python is installed on your system (you can download it here: https://www.python.org/downloads/).
 
 #### 1. After cloning the repo cd into the project folder and simply run:
    
@@ -18,9 +17,12 @@ Make sure Python is installed on your system (you can download it here: https://
 pip install .
 ```
 
-#### 2. Create an account and generate the API key here: https://console.groq.com/
+#### 2. Default: Create an account and generate the API key here: https://console.groq.com/
+By default, addcom uses the Groq API endpoint for chat completion. However, you can specify a custom endpoint using the `--base-url` or `-u` flag option. (In you do this, make sure to obtain an appropriate API key and specify the model supported by the chosen provider using the `--model`/ `-m` option).
 
-#### 3. Expose the API key to the terminal
+#### 3. Set the API key
+
+To do this you can ever expose the API key to the terminal:
 
   Command Prompt
   
@@ -31,19 +33,49 @@ pip install .
   Poweshell
   
   ```powershell
-  $env:GROQ_API_KEY="your_api_key_here"
+  $env:ADDCOM_API_KEY="your_api_key_here"
   ```
   
   Bash
   
   ```bash
-  $env:GROQ_API_KEY="your_api_key_here"
+  $env:ADDCOM_API_KEY="your_api_key_here"
   ```
+
+or provide the key using the `--api-key`/ `a` flag.
 
 #### 4. Run addcom
    
 ```cmd
- addcom [FILEPATH]
+ addcom [OPTIONS] FILE_PATH(S)...
 ```
-   
 
+# Usage 
+
+### Arguments
+
+You can add comments to one or multiple source code files. Just type addcom and specify the file paths. 
+
+```cmd
+ addcom examples/sample.py examples/test.py
+```
+
+### Options
+
+| Option          | Shortcut | Type   |                                                       | Default |
+| --------------- | -------- | ------ | ----------------------------------------------------- | ------- |
+| `--help`        |          | FLAG   | Show help message                                     | `N/A`   |
+| `--version`     | `-v`     | FLAG   | See the current tool version                          | `N/A`   |
+| `--output`      | `-o`     | PATH   | Specify an ouput filename to save the commented code  | None    |
+| `--api-key`     | `-a`     | TEXT   | Provide API key for authentication                    | None    |
+| `--base-url`    | `-u`     | TEXT   | Specify base URL for the API                          | None    |
+| `--model `      | `-o`     | TEXT   | Specify a LLM to use for comment generation           | None    |
+
+### Notes:
+`--output` / `-o` - If multiple files are specified, the commented source code from all files will be combined and saved into a single output file.
+
+`--api-key` / `-a` - As mentioned above, there are 2 ways to provide the API key to the tool, passing the API key using this option will override the API key that was exposed to the terminal.
+
+`--base-url` / `u` - If you decide to use a custom API endpoint, make sure to obtain an API key and specify a Large Language Model supported by the API of your choice.
+
+`--model`/ `-m` - You can find models compatible with the default API endpoint here: https://console.groq.com/docs/models
