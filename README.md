@@ -81,7 +81,7 @@ You can add comments to one or multiple source code files. Just type addcom and 
 
 `--base-url` / `u` - If you decide to use a custom API endpoint, make sure to obtain an API key and specify a Large Language Model supported by the API of your choice.
 
-Example: using OpenRouter API as base URL
+#### Example: using OpenRouter API as base URL
 
 ```cmd
  addcom -u https://openrouter.ai/api/v1 -a "your_api_key" -m meta-llama/llama-3.1-8b-instruct:free samples/test.py
