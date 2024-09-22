@@ -18,7 +18,7 @@ pip install .
 ```
 
 #### 2. Default: Create an account and generate the API key here: https://console.groq.com/
-By default, addcom uses the Groq API endpoint for chat completion. However, you can specify a custom endpoint using the `--base-url` or `-u` flag option. (In you do this, make sure to obtain an appropriate API key and specify the model supported by the chosen provider using the `--model`/ `-m` option).
+By default, addcom uses the Groq API endpoint for chat completion. However, you can specify a custom endpoint using the `--base-url` or `-u` flag option. (If you do this, make sure to obtain an appropriate API key and specify the model supported by the chosen provider using the `--model`/ `-m` option).
 
 #### 3. Set the API key
 
