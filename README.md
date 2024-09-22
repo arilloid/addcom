@@ -76,12 +76,13 @@ You can add comments to one or multiple source code files. Just type addcom and 
 
 `--api-key` / `-a` - As mentioned above, there are 2 ways to provide the API key to the tool, passing the API key using this option will override the API key that was exposed to the terminal.
 
-Example (using OpenRouter API)
+`--model`/ `-m` - You can find models compatible with the default API endpoint here: https://console.groq.com/docs/models
+
+
+`--base-url` / `u` - If you decide to use a custom API endpoint, make sure to obtain an API key and specify a Large Language Model supported by the API of your choice.
+
+Example: using OpenRouter API as base URL
 
 ```cmd
  addcom -u https://openrouter.ai/api/v1 -a "your_api_key" -m meta-llama/llama-3.1-8b-instruct:free samples/test.py
 ```
-
-`--base-url` / `u` - If you decide to use a custom API endpoint, make sure to obtain an API key and specify a Large Language Model supported by the API of your choice.
-
-`--model`/ `-m` - You can find models compatible with the default API endpoint here: https://console.groq.com/docs/models
