@@ -84,5 +84,5 @@ You can add comments to one or multiple source code files. Just type addcom and 
 #### Example: using OpenRouter API as base URL
 
 ```cmd
- addcom -u https://openrouter.ai/api/v1 -a "your_api_key" -m meta-llama/llama-3.1-8b-instruct:free samples/test.py
+ addcom -u https://openrouter.ai/api/v1 -a "your_api_key" -m meta-llama/llama-3.1-8b-instruct:free examples/test.py
 ```
