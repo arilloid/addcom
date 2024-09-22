@@ -5,6 +5,8 @@ Give it a relative/absolute path to your file and it will analyze its contents a
 
 ![addcom](https://github.com/user-attachments/assets/e01f1c1b-faf4-4c2d-b62b-a2492de1475b)
 
+See a demo of the functionality on YouTube: [addcom-demo](https://youtu.be/3jKifG2BLzc?si=M2MNCW2BASBnDQ7z)
+
 # Setup Instructions
 
 ### Prerequisites 
