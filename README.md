@@ -30,7 +30,7 @@ To do this you can expose the API key to the terminal:
    set GROQ_API_KEY=your_api_key_here
    ```
   
-  Powershell
+  PowerShell
   
   ```powershell
   $env:ADDCOM_API_KEY="your_api_key_here"
