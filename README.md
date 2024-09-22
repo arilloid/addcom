@@ -44,7 +44,7 @@ To do this you can expose the API key to the terminal:
 
 or provide the key using the `--api-key`/ `a` flag.
 
-#### 4. Run addcom
+#### 4. Run addcom.
    
 ```cmd
  addcom [OPTIONS] FILE_PATH(S)...
