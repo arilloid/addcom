@@ -68,7 +68,9 @@ You can add comments to one or multiple source code files. Just type addcom and 
 | --------------- | -------- | ------ | ----------------------------------------------------- | ------- |
 | `--help`        |          | FLAG   | Show help message                                     | `N/A`   |
 | `--version`     | `-v`     | FLAG   | See the current tool version                          | `N/A`   |
+| `--context`     | `-c`     | PATH   | Path to example file to provide context for the LLM   | None    |
 | `--output`      | `-o`     | PATH   | Specify an ouput filename to save the commented code  | None    |
+| `--stream`      | `-s`     | FLAG   | Stream the response live as it updates                | None    |
 | `--api-key`     | `-a`     | TEXT   | Provide API key for authentication                    | None    |
 | `--base-url`    | `-u`     | TEXT   | Specify base URL for the API                          | None    |
 | `--model `      | `-o`     | TEXT   | Specify a LLM to use for comment generation           | None    |
