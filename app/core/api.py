@@ -4,16 +4,41 @@ import sys
 import os
 
 
-# Create system prompt
-prompt = (
-    "You are a coding assistant. When provided with the contents of a code file, your task is to add appropriate "
-    "comments to explain it's functionality where necessary. Comments should be formatted according to best practices. "
-    "Return modified code with the added comments and no additional text or explanation as plain text"
-    "Make sure to not wrap the code in any brackets."
-)
+def build_prompt_messages(content: str, context: str) -> list[dict]:
+    """
+    Constructs messages for the LLM
+    """
+    # Create system prompt
+    system_prompt = (
+        "You are a coding assistant. When provided with the contents of a code file, your task is to add appropriate comments "
+        "to explain its functionality where necessary. Comments should follow best practices and be concise yet informative. "
+        "You may also receive example code snippets as a reference for the desired comment style. Carefully review these examples "
+        "paying special attention to how functions and complex logic are explained. Sample snippets will be prefixed with 'Example:'. "
+        "Your response should include only the modified code with the added comments,  without any additional text, explanations,"
+        " or changes to the existing code. Make sure not to wrap the code in the brackets."
+        "Again, don't provide any additional text with the code!"
+    )
+
+    # Initialize message list with the system prompt
+    messages = [{"role": "system", "content": system_prompt}]
+
+    # Add context file's contents as previous interaction - few-shot learning
+    if context is not None:
+        messages.append({"role": "user", "content": f"Example:\n{context}"})
+        messages.append({
+            "role": "assistant", 
+            "content": (
+                "Great! Please provide another example if you have one, "
+                "or share the source code you'd like me to add comments to."
+            )})
+
+    # Add the uncommented code, as the last user message
+    messages.append({"role": "user", "content": content})
+
+    return messages
 
 
-def generate_comments(file_path: str, content: str, api_key: str, url: str, model: str, stream: bool) -> str:
+def generate_comments(file_path: str, content: str, context: str, api_key: str, url: str, model: str, stream: bool) -> str:
     """
     Send the file content to the API endpoint to generate comments.
     Returns the code with generated comments.
@@ -40,16 +65,7 @@ def generate_comments(file_path: str, content: str, api_key: str, url: str, mode
 
     try:
         response = client.chat.completions.create(
-            messages=[
-                {
-                    "role": "system", 
-                    "content": prompt,
-                },
-                {
-                    "role": "user",
-                    "content": content,
-                }
-            ],
+            messages=build_prompt_messages(content, context),
             model=model,
             stream=stream
         )
