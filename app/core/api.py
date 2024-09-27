@@ -57,7 +57,6 @@ def generate_comments(file_path: str, content: str, api_key: str, url: str, mode
         if not stream:
             return response.choices[0].message.content
         else:
-            # Store streamed content
             streamed_content = ""
 
             print(f"--- {file_path} with added comments ---\n\n")
@@ -71,9 +70,8 @@ def generate_comments(file_path: str, content: str, api_key: str, url: str, mode
 
             print("\n\n")
             
-            # Return complete content for saving to file if necessary
             return streamed_content
     
-    except Exception as e:  # You can specify a more specific exception here
-        print(f"Error occurred while making an API call: {e}", file=sys.stderr)
+    except Exception as e:
+        print(f"Error occurred while trying to generate comments: {e}", file=sys.stderr)
         sys.exit(1)
