@@ -1,5 +1,6 @@
 import typer
 from rich import print
+from rich.markup import escape
 from typing_extensions import Annotated
 from typing import Optional
 from app.core.callbacks import version_callback, context_callback
@@ -26,10 +27,10 @@ def add_comments(
         )
     ] = None,
     context: Annotated[
-        Optional[list[str]],
+        Optional[str],
         typer.Option(
             "--context", "-c",
-            help="Paths to example files to provide context for the LLM.",
+            help="Path to example file to provide context for the LLM.",
             callback=context_callback
         )
     ] = None,
@@ -66,7 +67,7 @@ def add_comments(
             write_to_output_file(output, commented_content)
         else:
             print(f"--- {file_path} with added comments ---")
-            print(commented_content + "\n\n")
+            print(escape(commented_content) + "\n\n") 
 
 
 if __name__ == '__main__':
