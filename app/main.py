@@ -2,7 +2,7 @@ import typer
 from rich import print
 from typing_extensions import Annotated
 from typing import Optional
-from app.core.callbacks import version_callback
+from app.core.callbacks import version_callback, context_callback
 from app.core.file_operations import load_contents, write_to_output_file
 from app.core.api import generate_comments
 
@@ -23,6 +23,14 @@ def add_comments(
             help="See the current tool version",
             is_eager=True,
             callback=version_callback,
+        )
+    ] = None,
+     context: Annotated[
+        Optional[list[str]],
+        typer.Option(
+            "--context", "-c",
+            help="Paths to example files to provide context for the LLM.",
+            callback=context_callback
         )
     ] = None,
     output: Annotated[Optional[str],
