@@ -2,17 +2,35 @@ from openai import OpenAI
 import sys
 import os
 
+def build_prompt_messages(content: str, context: list[str]) -> list[dict]:
+    """
+    Constructs messages for the LLM
+    """
+    # Create system prompt
+    system_prompt = (
+        "You are a coding assistant. When provided with the contents of a code file, your task is to add appropriate "
+        "comments to explain it's functionality where necessary. Comments should be formatted according to best practices."
+        "You can be provided with example code to use as a reference for comment style. Each snippet will be prefixed"
+        " with 'Example:'. Return modified code with the added comments and no additional text or explanation, as plain text"
+        "Make sure to not wrap the code in any brackets."
+    )
 
-# Create system prompt
-prompt = (
-    "You are a coding assistant. When provided with the contents of a code file, your task is to add appropriate "
-    "comments to explain it's functionality where necessary. Comments should be formatted according to best practices. "
-    "Return modified code with the added comments and no additional text or explanation as plain text"
-    "Make sure to not wrap the code in any brackets."
-)
+    # Initialize message list with the system prompt
+    messages = [{"role": "system", "content": system_prompt}]
+
+    # Add context files's contents as previous interactions - few-shot learning
+    for context_file_content in context:
+        messages.append({"role": "user", "content": f"Example:\n{context_file_content}"})
+        messages.append({
+            "role": "assistant", 
+            "content": (
+                "Great! Please provide another example if you have one, "
+                "or share the source code file you'd like me to comment on."
+            )
+        })
 
 
-def generate_comments(content: str, api_key: str, url: str, model: str) -> str:
+def generate_comments(content: str, context: list[str], api_key: str, url: str, model: str) -> str:
     """
     Send the file content to the API endpoint to generate comments.
     Returns the code with generated comments.
