@@ -2,18 +2,21 @@ from openai import OpenAI
 import sys
 import os
 
+
 def build_prompt_messages(content: str, context: list[str]) -> list[dict]:
     """
     Constructs messages for the LLM
     """
     # Create system prompt
     system_prompt = (
-        "You are a coding assistant. When provided with the contents of a code file, your task is to add appropriate "
-        "comments to explain it's functionality where necessary. Comments should be formatted according to best practices."
-        "You can be provided with example code to use as a reference for comment style. Each snippet will be prefixed"
-        " with 'Example:'. Return modified code with the added comments and no additional text or explanation, as plain text"
-        "Make sure to not wrap the code in any brackets."
+        "You are a coding assistant. When provided with the contents of a code file, your task is to add appropriate comments "
+        "to explain its functionality where necessary. Comments should follow best practices and be concise yet informative. "
+        "You may also receive example code snippets as a reference for the desired comment style. Carefully review these examples, "
+        "paying special attention to how functions and complex logic are explained. Each sample snippet will be prefixed with 'Example:'. "
+        "Your response should include only the modified code with the added comments, formatted as plain text, without any additional text, "
+        "explanations, or changes to the existing code."
     )
+
 
     # Initialize message list with the system prompt
     messages = [{"role": "system", "content": system_prompt}]
@@ -25,9 +28,14 @@ def build_prompt_messages(content: str, context: list[str]) -> list[dict]:
             "role": "assistant", 
             "content": (
                 "Great! Please provide another example if you have one, "
-                "or share the source code file you'd like me to comment on."
+                "or share the source code you'd like me to add comments to."
             )
         })
+
+    # Add the uncommented code, as the last user message
+    messages.append({"role": "user", "content": content})
+
+    return messages
 
 
 def generate_comments(content: str, context: list[str], api_key: str, url: str, model: str) -> str:
@@ -57,16 +65,7 @@ def generate_comments(content: str, context: list[str], api_key: str, url: str, 
 
     try:
         response = client.chat.completions.create(
-            messages=[
-                {
-                    "role": "system", 
-                    "content": prompt,
-                },
-                {
-                    "role": "user",
-                    "content": content,
-                }
-            ],
+            messages=build_prompt_messages(content, context),
             model=model,
         )
         
