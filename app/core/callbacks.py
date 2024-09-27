@@ -1,5 +1,4 @@
 import typer
-from typing import Optional
 from rich import print
 from app import __version__
 from app.core.file_operations import load_contents

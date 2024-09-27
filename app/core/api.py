@@ -21,7 +21,7 @@ def build_prompt_messages(content: str, context: str) -> list[dict]:
     # Initialize message list with the system prompt
     messages = [{"role": "system", "content": system_prompt}]
 
-    # Add context files's contents as previous interactions - few-shot learning
+    # Add context file's contents as previous interaction - few-shot learning
     if context is not None:
         messages.append({"role": "user", "content": f"Example:\n{context}"})
         messages.append({
