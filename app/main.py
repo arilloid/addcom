@@ -25,7 +25,7 @@ def add_comments(
             callback=version_callback,
         )
     ] = None,
-     context: Annotated[
+    context: Annotated[
         Optional[list[str]],
         typer.Option(
             "--context", "-c",
@@ -60,7 +60,7 @@ def add_comments(
     for file_path in file_paths:
         content = load_contents(file_path)
 
-        commented_content = generate_comments(content, api_key, base_url, model)
+        commented_content = generate_comments(content, context, api_key, base_url, model)
 
         if output:
             write_to_output_file(output, commented_content)
