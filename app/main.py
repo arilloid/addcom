@@ -28,7 +28,7 @@ def add_comments(
     ] = None,
     context: Annotated[Optional[str],
         typer.Option("--context", "-c",
-            help="Path to example file to provide context for the LLM.",
+            help="Path to example file to provide context for the LLM",
             callback=context_callback
         )
     ] = None,
