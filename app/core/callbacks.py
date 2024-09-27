@@ -1,4 +1,5 @@
 import typer
+from typing import Optional
 from rich import print
 from app import __version__
 from app.core.file_operations import load_contents
@@ -13,11 +14,10 @@ def version_callback(provided: bool):
         raise typer.Exit()
     
 
-def context_callback(context_files: list[str]) -> list[str]:
+def context_callback(context_file: str) -> str:
     """
-    Load contents of example files
+    Load contents of example file
     """
-    context_contents = [load_contents(file) for file in context_files]
-    
-    return context_contents
-  
+    if context_file:
+        context_contents = load_contents(context_file)
+        return context_contents
