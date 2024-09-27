@@ -20,16 +20,14 @@ def add_comments(
         )
     ],
     version: Annotated[Optional[bool],
-        typer.Option( "--version", "-v",
+        typer.Option("--version", "-v",
             help="See the current tool version",
             is_eager=True,
             callback=version_callback,
         )
     ] = None,
-    context: Annotated[
-        Optional[str],
-        typer.Option(
-            "--context", "-c",
+    context: Annotated[Optional[str],
+        typer.Option("--context", "-c",
             help="Path to example file to provide context for the LLM.",
             callback=context_callback
         )
@@ -39,6 +37,11 @@ def add_comments(
             help="Specify an output filename to save the commented code"
         )
     ] = None,
+    stream: Annotated[Optional[bool],
+        typer.Option("--stream", "-s", 
+            help="Stream the response live as it updates"
+        )
+    ] = False,
     api_key: Annotated[Optional[str],
         typer.Option("--api-key", "-a", 
             help="Provide API key for authentication"
@@ -53,12 +56,7 @@ def add_comments(
         typer.Option("--model", "-m", 
             help="Specify a LLM to use for comment generation"
         )
-    ] = None,
-    stream: Annotated[Optional[bool],
-        typer.Option("--stream", "-s", 
-            help="Stream the response live as it updates"
-        )
-    ] = False,
+    ] = None
 ):
     """
     Add comments to each of the provided files.
