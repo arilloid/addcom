@@ -1,4 +1,5 @@
 from openai import OpenAI
+from rich import print
 import sys
 import os
 
@@ -12,7 +13,7 @@ prompt = (
 )
 
 
-def generate_comments(content: str, api_key: str, url: str, model: str) -> str:
+def generate_comments(file_path: str, content: str, api_key: str, url: str, model: str, stream: bool) -> str:
     """
     Send the file content to the API endpoint to generate comments.
     Returns the code with generated comments.
@@ -50,10 +51,27 @@ def generate_comments(content: str, api_key: str, url: str, model: str) -> str:
                 }
             ],
             model=model,
+            stream=stream
         )
         
-        return response.choices[0].message.content
+        if not stream:
+            return response.choices[0].message.content
+        else:
+            streamed_content = ""
+
+            print(f"--- {file_path} with added comments ---\n\n")
+
+            # Print each chunk to stdout as it arrives and accumulate content
+            for chunk in response:
+                chunk_content = chunk.choices[0].delta.content
+                if chunk_content:
+                    print(chunk_content, end='', flush=True)
+                    streamed_content += chunk_content
+
+            print("\n\n")
+            
+            return streamed_content
     
-    except Exception as e:  # You can specify a more specific exception here
-        print(f"Error occurred while making an API call: {e}", file=sys.stderr)
+    except Exception as e:
+        print(f"Error occurred while trying to generate comments: {e}", file=sys.stderr)
         sys.exit(1)

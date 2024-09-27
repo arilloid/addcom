@@ -45,6 +45,11 @@ def add_comments(
             help="Specify a LLM to use for comment generation"
         )
     ] = None,
+    stream: Annotated[Optional[bool],
+        typer.Option("--stream", "-s", 
+            help="Stream the response live as it updates"
+        )
+    ] = False,
 ):
     """
     Add comments to each of the provided files.
@@ -52,12 +57,12 @@ def add_comments(
     for file_path in file_paths:
         content = load_contents(file_path)
 
-        commented_content = generate_comments(content, api_key, base_url, model)
+        commented_content = generate_comments(file_path, content, api_key, base_url, model, stream)
 
         if output:
             write_to_output_file(output, commented_content)
-        else:
-            print(f"--- {file_path} with added comments ---")
+        elif not stream:
+            print(f"--- {file_path} with added comments ---\n\n")
             print(commented_content + "\n\n")
 
 
