@@ -1,5 +1,6 @@
 import sys
 import os
+import tomllib
 
 
 def load_contents(file_path: str):
@@ -33,3 +34,14 @@ def find_toml():
                 return os.path.join(root,file)
     print("Config File Wasn't Found")
     return None
+
+def read_toml(file: str):
+    if not os.path.isfile(file) or not file.endswith(".toml"):
+        print(f"File not found: {file}", file=sys.stderr)
+        return None
+
+    with open(file,"rb") as f:
+        data = tomllib.load(f)
+        return data
+
+
