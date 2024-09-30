@@ -25,3 +25,11 @@ def write_to_output_file(output: str, commented_content: str):
             
     except IOError as e:
         print(f"Error writing to file {output}: {e}", file=sys.stderr)
+
+def find_toml():
+    for root,dirs,files in os.walk(".",topdown=False):
+        for file in files:
+            if file.endswith(".toml"):
+                return os.path.join(root,file)
+    print("Config File Wasn't Found")
+    return None
