@@ -1,11 +1,12 @@
 import typer
-from rich import print
 from rich.markup import escape
+from rich import print
 from typing_extensions import Annotated
 from typing import Optional
 from app.core.callbacks import version_callback, context_callback
-from app.core.file_operations import load_contents, write_to_output_file
+from app.core.file_operations import load_contents, write_to_output_file,get_config
 from app.core.api import generate_comments
+
 
 # Create Typer instance
 app = typer.Typer()
@@ -61,6 +62,15 @@ def add_comments(
     """
     Add comments to each of the provided files.
     """
+    config_data = get_config()
+
+    context = context or config_data.get("context")
+    api_key = api_key or config_data.get("api_key")
+    stream = stream or config_data.get("stream",False)
+    model = model or config_data.get("model")
+
+    
+
     for file_path in file_paths:
         content = load_contents(file_path)
 
