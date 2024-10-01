@@ -43,5 +43,17 @@ def read_toml(file: str):
     with open(file,"rb") as f:
         data = tomllib.load(f)
         return data
+    
+def get_config():
+    toml_file =find_toml()
+
+    if toml_file:
+        config_data = read_toml(toml_file)
+        return config_data
+
+    return None
+    
+    
+    
 
 
