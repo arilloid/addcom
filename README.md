@@ -95,7 +95,7 @@ the supported arguments as of now are:
 2. To create your own configuration file, run the following command:
 
    ```sh
-   cp config.toml.example addcom_config.toml
+   cp config.toml.example ~/addcom_config.toml
    ```
 
    
