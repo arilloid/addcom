@@ -80,7 +80,9 @@ You can add comments to one or multiple source code files. Just type addcom and 
 
 The functionality to provide arguments via a TOML file has been provided as well, you can find more information about a TOML file [here](https://toml.io/en/) 
 
-if you want to pre-define the arguments for the CLI tool, you can add the arguments in the `config.toml` file as well
+if you want to pre-define the arguments for the CLI tool, you can add the arguments in the `addcom_config.toml` file as well in the home directory
+
+this will only work if you have `addcom_config.toml` in the home directory
 the supported arguments as of now are:
 
 
@@ -93,8 +95,9 @@ the supported arguments as of now are:
 2. To create your own configuration file, run the following command:
 
    ```sh
-   cp config.toml.example config.toml
+   cp config.toml.example addcom_config.toml
    ```
+
    
 
 ### Notes
