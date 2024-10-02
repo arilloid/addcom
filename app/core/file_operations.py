@@ -1,5 +1,6 @@
 import sys
 import os
+import tomllib
 
 
 def load_contents(file_path: str):
@@ -25,3 +26,34 @@ def write_to_output_file(output: str, commented_content: str):
             
     except IOError as e:
         print(f"Error writing to file {output}: {e}", file=sys.stderr)
+
+def find_toml():
+    home_dir = os.path.expanduser("~")
+    for file in os.listdir(home_dir):
+        if file == "addcom_config.toml":
+            return os.path.join(home_dir,file)
+    print("Config File Wasn't Found")
+    return None
+
+def read_toml(file: str):
+    if not os.path.isfile(file):
+        print(f"File not found: {file}", file=sys.stderr)
+        return None
+
+    with open(file,"rb") as f:
+        data = tomllib.load(f)
+        return data
+    
+def get_config():
+    toml_file =find_toml()
+
+    if toml_file:
+        config_data = read_toml(toml_file)
+        return config_data
+
+    return None
+    
+    
+    
+
+
