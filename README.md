@@ -107,6 +107,8 @@ the supported arguments as of now are:
 
 `--base-url` / `u` - If you decide to use a custom API endpoint, make sure to obtain an API key and specify a Large Language Model supported by the API of your choice.
 
+`Windows Path Handling`: When specifying the location of the context file, using standard Windows path single backslashes (\) can cause parsing errors, as tomllib treats those as escape characters. Windows users should specify paths with double backslashes (e.g., context = "examples\\commented.py" instead of context = "examples\commented.py").
+
 #### Example: using OpenRouter API as base URL
 
 ```cmd
