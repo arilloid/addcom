@@ -75,6 +75,28 @@ You can add comments to one or multiple source code files. Just type addcom and 
 | `--base-url`    | `-u`     | TEXT   | Specify base URL for the API                          | None    |
 | `--model `      | `-o`     | TEXT   | Specify a LLM to use for comment generation           | None    |
 
+
+## Configuration via TOML file
+
+The functionality to provide arguments via a TOML file has been provided as well, you can find more information about a TOML file [here](https://toml.io/en/) 
+
+if you want to pre-define the arguments for the CLI tool, you can add the arguments in the `config.toml` file as well
+the supported arguments as of now are:
+
+
+`model` - specifies the model of groq to be used
+`stream` - can be set to "true" or "false"
+`api_key` - specifies the api_key to be used for the API
+`context` - specifies the context file to provide 
+
+1. A sample configuration file `config.toml.example` is provided in the repository.
+2. To create your own configuration file, run the following command:
+
+   ```sh
+   cp config.toml.example config.toml
+   ```
+   
+
 ### Notes
 `--output` / `-o` - If multiple files are specified, the commented source code from all files will be combined and saved into a single output file.
 
