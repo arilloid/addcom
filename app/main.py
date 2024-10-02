@@ -64,10 +64,11 @@ def add_comments(
     """
     config_data = get_config()
 
-    context = context or config_data.get("context")
-    api_key = api_key or config_data.get("api_key")
-    stream = stream or config_data.get("stream",False)
-    model = model or config_data.get("model")
+    if config_data != None:
+        context = context or config_data.get("context")
+        api_key = api_key or config_data.get("api_key")
+        stream = stream or config_data.get("stream",False)
+        model = model or config_data.get("model")
 
     
 

@@ -28,15 +28,15 @@ def write_to_output_file(output: str, commented_content: str):
         print(f"Error writing to file {output}: {e}", file=sys.stderr)
 
 def find_toml():
-    for root,dirs,files in os.walk(".",topdown=False):
-        for file in files:
-            if file.endswith(".toml"):
-                return os.path.join(root,file)
+    home_dir = os.path.expanduser("~")
+    for file in os.listdir(home_dir):
+        if file == "addcom_config.toml":
+            return os.path.join(home_dir,file)
     print("Config File Wasn't Found")
     return None
 
 def read_toml(file: str):
-    if not os.path.isfile(file) or not file.endswith(".toml"):
+    if not os.path.isfile(file):
         print(f"File not found: {file}", file=sys.stderr)
         return None
 
