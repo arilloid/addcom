@@ -1,4 +1,5 @@
 import typer
+import sys
 from rich.markup import escape
 from rich import print
 from typing_extensions import Annotated
@@ -6,7 +7,10 @@ from typing import Optional
 from app.core.callbacks import version_callback, context_callback
 from app.core.file_operations import load_contents, write_to_output_file,get_config
 from app.core.api import generate_comments
+from rich.console import Console
 
+# Console instance for error output
+error_console = Console(stderr=True, soft_wrap=True, style="red")
 
 # Create Typer instance
 app = typer.Typer()
@@ -62,26 +66,35 @@ def add_comments(
     """
     Add comments to each of the provided files.
     """
-    config_data = get_config()
 
-    if config_data != None:
-        context = context or config_data.get("context")
-        api_key = api_key or config_data.get("api_key")
-        stream = stream or config_data.get("stream",False)
-        model = model or config_data.get("model")
+    try:
+        # Get default settings from TOML file (if present in user's home dir)
+        config_data = get_config()
 
+        # CLI arguments take precedence over default settings
+        if config_data != None:
+            context = context or config_data.get("context")
+            api_key = api_key or config_data.get("api_key")
+            stream = stream or config_data.get("stream",False)
+            model = model or config_data.get("model")
+
+
+        # Add comments to provided file(s)
+        for file_path in file_paths:
+            content = load_contents(file_path)
+
+            if content:
+                commented_content = generate_comments(file_path, content, context, api_key, base_url, model, stream)
+
+                if output:
+                    write_to_output_file(output, commented_content)
+                elif not stream:
+                    print(f"--- {file_path} with added comments ---\n\n")
+                    print(escape(commented_content) + "\n\n") 
     
-
-    for file_path in file_paths:
-        content = load_contents(file_path)
-
-        commented_content = generate_comments(file_path, content, context, api_key, base_url, model, stream)
-
-        if output:
-            write_to_output_file(output, commented_content)
-        elif not stream:
-            print(f"--- {file_path} with added comments ---\n\n")
-            print(escape(commented_content) + "\n\n") 
+    except Exception as e:
+        error_console.print(e)
+        sys.exit(1)
 
 
 if __name__ == '__main__':

@@ -48,8 +48,7 @@ def generate_comments(file_path: str, content: str, context: str, api_key: str, 
 
     # Check if API key was successfully set
     if not api_key:
-        print("Error: API key must be provided either as an argument or through the environment.", file=sys.stderr)
-        sys.exit(1)
+        raise RuntimeError(f"Error: API key must be provided to generate comments")
 
     # Use Groq API endpoint as default if base URL not provided
     base_url = url or "https://api.groq.com/openai/v1"
@@ -89,5 +88,4 @@ def generate_comments(file_path: str, content: str, context: str, api_key: str, 
             return streamed_content
     
     except Exception as e:
-        print(f"Error occurred while trying to generate comments: {e}", file=sys.stderr)
-        sys.exit(1)
+        raise RuntimeError(f"Error occurred while trying to generate comments for the file '{file_path}': {e}")
