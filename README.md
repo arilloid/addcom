@@ -98,6 +98,9 @@ You can add comments to one or multiple source code files. Just type addcom and 
 | `--model `      | `-o`     | TEXT   | Specify a LLM to use for comment generation           | None    |
 
 ### Notes
+
+Providing CLI options will override the default `TOML` settings.
+
 `--output` / `-o` - If multiple files are specified, the commented source code from all files will be combined and saved into a single output file.
 
 `--api-key` / `-a` - As mentioned above, there are 3 ways to provide the API key to the tool, passing the API key using this option will override the API key that was exposed to the terminal/the API key set in the `TOML`.
