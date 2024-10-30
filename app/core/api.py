@@ -1,6 +1,5 @@
 from openai import OpenAI
 from rich import print
-import sys
 import os
 
 
