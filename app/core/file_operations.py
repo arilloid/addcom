@@ -1,10 +1,10 @@
-import sys
 import os
 import tomllib
 from rich.console import Console
 
 # Console instance for warning outputs
 warning_console = Console(stderr=True, soft_wrap=True, style="yellow")
+
 
 def load_contents(file_path: str):
     """
@@ -14,24 +14,23 @@ def load_contents(file_path: str):
     if not os.path.isfile(file_path):
         warning_console.print(f"File not found: {file_path}")
         return None
-    
+
     try:
-        with open(file_path, 'r') as file:
+        with open(file_path, "r") as file:
             return file.read()
-        
+
     except IOError as e:
         raise RuntimeError(f"Error reading file {file_path}: {e}")
-    
-    
+
 
 def write_to_output_file(output: str, commented_content: str):
     """
-    Append the commented content to the specified output file 
+    Append the commented content to the specified output file
     """
     try:
-        with open(output, 'a') as f:
+        with open(output, "a") as f:
             f.write(commented_content + "\n\n")
-            
+
     except IOError as e:
         raise RuntimeError(f"Error writing to file {output}: {e}")
 
@@ -44,9 +43,9 @@ def find_toml():
 
     for file in os.listdir(home_dir):
         if file == "addcom_config.toml":
-            return os.path.join(home_dir,file)
-        
-    warning_console.print(f"Config file was not found")
+            return os.path.join(home_dir, file)
+
+    warning_console.print("Config file was not found")
     return None
 
 
@@ -55,27 +54,22 @@ def read_toml(file: str):
     Read the contents of the TOML and parse them using tomlib
     """
     try:
-        with open(file,"rb") as f:
+        with open(file, "rb") as f:
             data = tomllib.load(f)
             return data
-    
+
     except IOError as e:
         raise RuntimeError(f"Error reading TOML file {file}: {e}")
-    
-    
+
+
 def get_config():
     """
     Retrieve configuration settings from TOML file
     """
-    toml_file =find_toml()
+    toml_file = find_toml()
 
     if toml_file:
         config_data = read_toml(toml_file)
         return config_data
 
     return None
-    
-    
-    
-
-

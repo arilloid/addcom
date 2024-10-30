@@ -3,7 +3,7 @@ from rich import print
 from app import __version__
 from app.core.file_operations import load_contents
 
- 
+
 def version_callback(provided: bool):
     """
     Print current tool version if a flag option was provided
@@ -11,7 +11,7 @@ def version_callback(provided: bool):
     if provided:
         print(__version__)
         raise typer.Exit()
-    
+
 
 def context_callback(context_file: str) -> str:
     """

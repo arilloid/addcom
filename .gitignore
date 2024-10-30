@@ -3,3 +3,4 @@ build/
 app.egg-info
 **/__pycache__/
 config.toml
+.ruff_cache/

@@ -1,0 +1,12 @@
+# Black - source code formatter configurations
+[tool.black]
+line-length = 90
+# 'extend-exclude' excludes files or directories in addition to the defaults
+extend-exclude = '''
+    /examples/  # exclude sample test files
+'''
+
+# Ruff - linting configs
+[tool.ruff]
+# 'extend-exclude' excludes files or directories in addition to the defaults
+extend-exclude = ["examples"]
