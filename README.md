@@ -44,7 +44,7 @@ To do this you can expose the API key to the terminal:
   $env:ADDCOM_API_KEY="your_api_key_here"
   ```
 
-or provide the key using the `--api-key`/ `a` flag.
+provide the key using the `--api-key`/ `a` option flag or set the API key in the `TOML` file.
 
 #### 4. Run addcom.
    
