@@ -44,12 +44,44 @@ To do this you can expose the API key to the terminal:
   $env:ADDCOM_API_KEY="your_api_key_here"
   ```
 
-or provide the key using the `--api-key`/ `a` flag.
+provide the key using the `--api-key`/ `a` option flag or set the API key in the `TOML` file.
 
 #### 4. Run addcom.
    
 ```cmd
  addcom [OPTIONS] FILE_PATH(S)...
+```
+
+## Configuration via TOML file
+
+You can specify your preferred settings for the CLI tool by creating and editing a TOML configuration file. It will allow you to customize the default options to tailor the tool's behaviour to your needs. Learn more about TOML on the [official website](https://toml.io/en/). 
+
+**Important!**: This will only work if you put `addcom_config.toml` in your home directory.
+
+The supported arguments as of now are:
+- `model` - specify the LLM to be used.
+- `stream` - allow continous printing of model outputs as they are generated (can be set to "true" or "false").
+- `api_key` - specify the api_key to be used for the API.
+- `context` - path to the context file (provide the LLM with the commented file to base the comment style off of)
+
+`Windows Path Handling`: When specifying the location of the context file, using standard Windows path single backslashes (\) can cause parsing errors, as tomllib treats those as escape characters. Windows users should specify paths with double backslashes (e.g., context = "examples\\commented.py" instead of context = "examples\commented.py").
+
+A sample configuration file `config.toml.example` is provided in the repository.
+
+To create your own configuration file, run the following command:
+
+```sh
+cp config.toml.example ~/addcom_config.toml
+```
+
+# Usage 
+
+### Arguments
+
+You can add comments to one or multiple source code files. Just type addcom and specify the file paths. 
+
+```cmd
+ addcom examples/sample.py examples/test.py
 ```
 
 ### Options
@@ -65,48 +97,18 @@ or provide the key using the `--api-key`/ `a` flag.
 | `--base-url`    | `-u`     | TEXT   | Specify base URL for the API                          | None    |
 | `--model `      | `-o`     | TEXT   | Specify a LLM to use for comment generation           | None    |
 
-
-## Configuration via TOML file
-
-The functionality to provide arguments via a TOML file has been provided as well, you can find more information about a TOML file [here](https://toml.io/en/) 
-
-if you want to pre-define the arguments for the CLI tool, you can add the arguments in the `addcom_config.toml` file as well in the home directory
-
-this will only work if you have `addcom_config.toml` in the home directory
-the supported arguments as of now are:
-- `model` - specifies the model of groq to be used
-- `stream` - can be set to "true" or "false"
-- `api_key` - specifies the api_key to be used for the API
-- `context` - specifies the context file to provide 
-
-A sample configuration file `config.toml.example` is provided in the repository.
-To create your own configuration file, run the following command:
-
-   ```sh
-   cp config.toml.example ~/addcom_config.toml
-   ```
-
-# Usage 
-
-### Arguments
-
-You can add comments to one or multiple source code files. Just type addcom and specify the file paths. 
-
-```cmd
- addcom examples/sample.py examples/test.py
-```
-
 ### Notes
+
+Providing CLI options will override the default `TOML` settings.
+
 `--output` / `-o` - If multiple files are specified, the commented source code from all files will be combined and saved into a single output file.
 
-`--api-key` / `-a` - As mentioned above, there are 2 ways to provide the API key to the tool, passing the API key using this option will override the API key that was exposed to the terminal.
+`--api-key` / `-a` - As mentioned above, there are 3 ways to provide the API key to the tool, passing the API key using this option will override the API key that was exposed to the terminal/the API key set in the `TOML`.
 
 `--model`/ `-m` - You can find models compatible with the default API endpoint here: https://console.groq.com/docs/models
 
 
 `--base-url` / `u` - If you decide to use a custom API endpoint, make sure to obtain an API key and specify a Large Language Model supported by the API of your choice.
-
-`Windows Path Handling`: When specifying the location of the context file, using standard Windows path single backslashes (\) can cause parsing errors, as tomllib treats those as escape characters. Windows users should specify paths with double backslashes (e.g., context = "examples\\commented.py" instead of context = "examples\commented.py").
 
 #### Example: using OpenRouter API as base URL
 
