@@ -9,7 +9,11 @@ def version_callback(provided: bool):
     Print current tool version if a flag option was provided
     """
     if provided:
-        print(__version__)
+        if __version__:
+            print(f"{__version__}")
+        else:
+            print("version not defined")
+
         raise typer.Exit()
 
 

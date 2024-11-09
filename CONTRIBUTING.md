@@ -9,11 +9,26 @@ Fork the repo and follow the setup instructions in [README.md]([https://github.c
 
 ## Testing 
 
-To test your code changes, you can manually rebuild the tool by rerunning the following command in the root of the project:
+To test your code changes, you need to rebuild the tool and set up the testing dependencies. This project uses `pytest` for unit testing and `pytest-mock` for mocking. Install both packages by running:
+
+
+```sh
+pip install pytest pytest-mock
+```
+
+Then, rebuild the tool by running:
 
 ```sh
 pip install .
 ```
+
+Once everything is set up, you can run all tests from the root of the project with:
+
+```sh
+pytest
+```
+
+This will execute the unit tests to validate your changes.
 
 ## Code Formatting & Linting
 
