@@ -72,7 +72,7 @@ def add_comments(
         config_data = get_config()
 
         # CLI arguments take precedence over default settings
-        if config_data != None:
+        if config_data is not None:
             context = context or config_data.get("context")
             api_key = api_key or config_data.get("api_key")
             stream = stream or config_data.get("stream", False)
