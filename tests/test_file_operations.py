@@ -1,17 +1,22 @@
 import pytest
+import os
 from unittest.mock import mock_open, patch
 from app.core.file_operations import read_toml, find_toml, get_config
+
 
 def test_read_toml_good():
     toml_content = b"""
     fake_api_key = "abcdefg12345678"
     fake_model_name = "seneca-ai"
     """
-    
+
     with patch("builtins.open", mock_open(read_data=toml_content)):
-        result = read_toml("good.toml") 
-        
-        assert result == {'fake_api_key': 'abcdefg12345678', 'fake_model_name': 'seneca-ai'}
+        result = read_toml("good.toml")
+
+        assert result == {
+            "fake_api_key": "abcdefg12345678",
+            "fake_model_name": "seneca-ai",
+        }
 
 
 def test_read_toml_raises_ioerror():
@@ -26,7 +31,8 @@ def test_find_toml_found():
     with patch("os.path.expanduser", return_value="/mock/home/dir"):
         with patch("os.listdir", return_value=["addcom_config.toml", "other_file.txt"]):
             result = find_toml()
-            assert result == "/mock/home/dir/addcom_config.toml"
+            expected_path = os.path.join("/mock/home/dir", "addcom_config.toml")
+            assert result == expected_path
 
 
 def test_find_toml_not_found():
@@ -38,7 +44,10 @@ def test_find_toml_not_found():
 
 def test_get_config_with_valid_toml():
     with patch("app.core.file_operations.find_toml", return_value="valid_toml_path.toml"):
-        mock_toml_data = {"fake_api_key": "abcdefg12345678", "fake_model_name": "seneca-ai"}
+        mock_toml_data = {
+            "fake_api_key": "abcdefg12345678",
+            "fake_model_name": "seneca-ai",
+        }
         with patch("app.core.file_operations.read_toml", return_value=mock_toml_data):
             result = get_config()
 

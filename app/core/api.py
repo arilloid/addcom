@@ -7,6 +7,12 @@ def build_prompt_messages(content: str, context: str) -> list[dict]:
     """
     Constructs messages for the LLM
     """
+    # Raise an error if no code was provided
+    if not content.strip():
+        raise ValueError(
+            "It seems that the specified file is empty, please provide code to comment"
+        )
+
     # Create system prompt
     system_prompt = (
         "You are a coding assistant. When provided with the contents of a code file, your task is to add appropriate comments "
