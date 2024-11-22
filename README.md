@@ -13,10 +13,10 @@ See a demo of the functionality on YouTube: [addcom-demo](https://youtu.be/3jKif
 
 > Make sure Python is installed on your system (you can download it here: https://www.python.org/downloads/).
 
-#### 1. After cloning the repo cd into the project folder and simply run:
-   
-```cmd
-pip install .
+#### 1. Install the tool using `pip`
+
+```sh
+pip install addcom
 ```
 
 #### 2. Default: Create an account and generate the API key here: https://console.groq.com/
