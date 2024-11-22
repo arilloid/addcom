@@ -1,7 +1,7 @@
 # Poetry - project metadata
 [tool.poetry]
 name = "addcom"
-version = "1.0.0"
+version = "1.0.1"
 description = "a CLI tool for adding comments to your source code files"
 authors = ["Arina Kolodeznikova <arinak1017@gmail.com>"]
 license = "MIT"
