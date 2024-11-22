@@ -1,7 +1,5 @@
 import typer
-from rich import print
-from app import __version__
-from app.core.file_operations import load_contents
+from .file_operations import load_contents, read_toml
 
 
 def version_callback(provided: bool):
@@ -9,10 +7,8 @@ def version_callback(provided: bool):
     Print current tool version if a flag option was provided
     """
     if provided:
-        if __version__:
-            print(f"{__version__}")
-        else:
-            print("version not defined")
+        project_data = read_toml("pyproject.toml")
+        print(project_data["tool"]["poetry"]["version"])
 
         raise typer.Exit()
 

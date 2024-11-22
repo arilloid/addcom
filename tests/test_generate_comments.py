@@ -1,5 +1,5 @@
 import pytest
-from app.core.api import generate_comments
+from app.api import generate_comments
 
 
 @pytest.fixture
@@ -32,7 +32,7 @@ def mock_openai_client(mocker):
     Fixture to mock the OpenAI client and its responses
     """
     mock_client = mocker.MagicMock()
-    mocker.patch("app.core.api.OpenAI", return_value=mock_client)
+    mocker.patch("app.api.OpenAI", return_value=mock_client)
     return mock_client
 
 

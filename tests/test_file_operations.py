@@ -1,7 +1,7 @@
 import pytest
 import os
 from unittest.mock import mock_open, patch
-from app.core.file_operations import read_toml, find_toml, get_config
+from app.file_operations import read_toml, find_toml, get_config
 
 
 def test_read_toml_good():
@@ -43,19 +43,19 @@ def test_find_toml_not_found():
 
 
 def test_get_config_with_valid_toml():
-    with patch("app.core.file_operations.find_toml", return_value="valid_toml_path.toml"):
+    with patch("app.file_operations.find_toml", return_value="valid_toml_path.toml"):
         mock_toml_data = {
             "fake_api_key": "abcdefg12345678",
             "fake_model_name": "seneca-ai",
         }
-        with patch("app.core.file_operations.read_toml", return_value=mock_toml_data):
+        with patch("app.file_operations.read_toml", return_value=mock_toml_data):
             result = get_config()
 
             assert result == mock_toml_data
 
 
 def test_get_config_with_no_toml():
-    with patch("app.core.file_operations.find_toml", return_value=None):
+    with patch("app.file_operations.find_toml", return_value=None):
         result = get_config()
 
         assert result is None

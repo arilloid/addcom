@@ -21,7 +21,9 @@ jobs:
         
     - name: Build the tool
       run: |
-        pip install .
+        python -m pip install --upgrade pip
+        pip install poetry
+        poetry install
   
     - name: Test with pytest
       run: |

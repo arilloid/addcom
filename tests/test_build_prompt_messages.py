@@ -1,5 +1,5 @@
 import pytest
-from app.core.api import build_prompt_messages
+from app.api import build_prompt_messages
 
 
 @pytest.fixture

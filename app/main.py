@@ -1,13 +1,17 @@
-import typer
 import sys
-from rich.markup import escape
-from rich import print
+
+import typer
 from typing_extensions import Annotated
 from typing import Optional
-from app.core.callbacks import version_callback, context_callback
-from app.core.file_operations import load_contents, write_to_output_file, get_config
-from app.core.api import generate_comments
+
+from rich import print
 from rich.console import Console
+from rich.markup import escape
+
+from .callbacks import version_callback, context_callback
+from .file_operations import load_contents, write_to_output_file, get_config
+from .api import generate_comments
+
 
 # Console instance for error output
 error_console = Console(stderr=True, soft_wrap=True, style="red")
