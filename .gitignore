@@ -1,7 +1,18 @@
+# Environment Variables
 .env
+
+# Build and distribution directories
 build/
 app.egg-info
+
+# Python cache
 **/__pycache__/
-config.toml
+
+# Linting cache
 .ruff_cache
+
+# Poetry lock file
 poetry.lock
+
+# pytest cache
+.pytest_cache/
