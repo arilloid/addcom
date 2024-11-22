@@ -2,33 +2,45 @@
 
 If you spot bugs or have any enhancement suggestions for the project, don't hesitate to create an Issue and open a Pull Request! 
 
+## Prerequisites 
+
+> `addcom` uses [Poetry](https://python-poetry.org/) for dependency management and packaging. Ensure that Poetry is installed on your system before getting started!
+
+To install Poetry, run the following command:
+
+```sh
+pip install poetry
+```
+
 ## Project Setup 
 
-Right now, since the tool is not distributed through any package managers, the setup instructions for both users and developers are practically identical.
-Fork the repo and follow the setup instructions in [README.md]([https://github.com/arilloid/addcom/blob/main/README.md#](https://github.com/arilloid/addcom/blob/main/README.md#setup-instructions)).
+#### 1. Fork the repository and clone it to your local machine.
+
+#### 2. After cloning the repo cd into the project folder and simply run:
+   
+```sh
+poetry install
+```
+
+This command will automatically create a virtual environment & install all the necessary dependencies + the project package itself within it, making it ready for development.
+
+#### 3. Run the tool:
+
+```sh
+poetry run addcom
+```
+
+Refer to the setup instructions in [README.md](https://github.com/arilloid/addcom/blob/main/README.md#setup-instructions) for more details.
 
 ## Testing 
 
-To test your code changes, you need to rebuild the tool and set up the testing dependencies. This project uses `pytest` for unit testing and `pytest-mock` for mocking. Install both packages by running:
+This project uses `pytest` for unit testing and `pytest-mock` for mocking.
 
-
-```sh
-pip install pytest pytest-mock
-```
-
-Then, rebuild the tool by running:
+You can execute all unit tests by running:
 
 ```sh
-pip install .
+poetry run pytest
 ```
-
-Once everything is set up, you can run all tests from the root of the project with:
-
-```sh
-pytest
-```
-
-This will execute the unit tests to validate your changes.
 
 ## Code Formatting & Linting
 
@@ -48,25 +60,18 @@ To take full advantage of automatic formatting and linting, please install the f
 
 ### Manual Formatting & Linting
 
-Install both of the tools using `pip`:
-
-```sh
-pip install black
-pip install ruff
-```
-
 #### Format your code
 
 Format the files you modified mannualy by running:
 
 ```sh
-black {source_file_or_directory}
+poetry run black {source_file_or_directory}
 ```
 
-Format the entire project by running the python script located at the root of the repo:
+Format the entire project by running Black from the root of the repo:
 
 ```sh
-python format.py
+poetry run black .
 ```
 
 #### Lint your code
@@ -74,11 +79,11 @@ python format.py
 You can lint the files manually by running: 
 
 ```sh
-ruff check --fix {source_file_or_directory}
+poetry run ruff check --fix {source_file_or_directory}
 ``` 
 
-You can also run the script located at the root of the repo to lint the entire project
+You can also run Ruff from the root of the repo to lint the entire project:
 
 ```sh
-python lint.py
+poetry run ruff check --fix .
 ```
