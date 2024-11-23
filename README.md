@@ -49,7 +49,7 @@ By default, addcom uses the Groq API endpoint for chat completion. However, you 
 - You can provide the key using the `--api-key`/ `-a` option flag:
 
   ```bash
-  addcom [OPTIONS] FILE_PATH(S) -a <your_api_key>
+  addcom [OPTIONS] FILE_PATH(S) -a "your_api_key"
   ```
 
 - You can set the API key in the `TOML` file.
