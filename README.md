@@ -24,7 +24,9 @@ By default, addcom uses the Groq API endpoint for chat completion. However, you 
 
 #### 3. Set the API key
 
-To do this you can expose the API key to the terminal:
+**There are 3 ways to set your API key:**
+
+- You can expose the API key to the terminal:
 
   Command Prompt
   
@@ -44,19 +46,25 @@ To do this you can expose the API key to the terminal:
   $env:ADDCOM_API_KEY="your_api_key_here"
   ```
 
-provide the key using the `--api-key`/ `a` option flag or set the API key in the `TOML` file.
+- You can provide the key using the `--api-key`/ `-a` option flag:
+
+  ```bash
+  addcom [OPTIONS] FILE_PATH(S) -a <your_api_key>
+  ```
+
+- You can set the API key in the `TOML` file.
 
 #### 4. Run addcom.
    
 ```cmd
- addcom [OPTIONS] FILE_PATH(S)...
+addcom [OPTIONS] FILE_PATH(S)...
 ```
 
 ## Configuration via TOML file
 
 You can specify your preferred settings for the CLI tool by creating and editing a TOML configuration file. It will allow you to customize the default options to tailor the tool's behaviour to your needs. Learn more about TOML on the [official website](https://toml.io/en/). 
 
-**Important!**: This will only work if you put `addcom_config.toml` in your home directory.
+> **Important!**: This will only work if you put `addcom_config.toml` in your home directory.
 
 The supported arguments as of now are:
 - `model` - specify the LLM to be used.
@@ -67,12 +75,6 @@ The supported arguments as of now are:
 `Windows Path Handling`: When specifying the location of the context file, using standard Windows path single backslashes (\) can cause parsing errors, as tomllib treats those as escape characters. Windows users should specify paths with double backslashes (e.g., context = "examples\\commented.py" instead of context = "examples\commented.py").
 
 A sample configuration file `config.toml.example` is provided in the repository.
-
-To create your own configuration file, run the following command:
-
-```sh
-cp config.toml.example ~/addcom_config.toml
-```
 
 # Usage 
 
